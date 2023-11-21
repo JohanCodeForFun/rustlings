@@ -32,25 +32,25 @@ mod my_module {
     // TODO: Complete the function signature!
     pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
         // TODO: Complete the output declaration!
-        let mut output = vec![];
-        for (string, command) in input.iter() {
-            // TODO: Complete the function body. You can do it!
-            match command {
-                Command::Uppercase => {
-                    output.push(string.to_uppercase());
+        input
+            .iter()
+            .map(|(string, command)| {
+                match command {
+                    Command::Uppercase => {
+                        string.to_uppercase()
+                    }
+                    Command::Trim => {
+                        string.trim().to_string()
+                    }
+                    Command::Append(num) => {
+                        format!(
+                            "{string}{}",
+                            "bar".repeat(*num)
+                        )
+                    }
                 }
-                Command::Trim => {
-                    output.push(string.trim().to_string());
-                }
-                Command::Append(num) => {
-                    output.push(format!(
-                        "{string}{}",
-                        "bar".repeat(*num)
-                    ));
-                }
-            }
-        }
-        output
+            })
+            .collect()
     }
 }
 
